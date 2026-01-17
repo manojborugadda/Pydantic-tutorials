@@ -14,7 +14,7 @@
 
 5.No documentation - The code doesn't clearly document what valid inputs look like.
 
-# automatic type coercion in Pydantic
+# Automatic type coercion in Pydantic
 
 Pydantic automatically converts data types when possible. For example, if you pass a string "32" for an age field expecting an integer, Pydantic will convert it to 32.
 
@@ -92,8 +92,9 @@ class Patient(BaseModel):
 
 
 # Email Validation with Pydantic
-EmailStr is a Pydantic validator that automatically validates email format and ensures the field contains a valid email address
-Note: You may need to install the email-validator package: pip install email-validator
+**EmailStr** is a Pydantic validator that automatically validates email format and ensures the field contains a valid email address
+
+NOTE: You may need to install the email-validator package: pip install email-validator
 
 ```python
 from pydantic import BaseModel, EmailStr
@@ -120,3 +121,22 @@ Benefits:
 ✅ No need to write regex or custom validation logic
 
 ✅ Clear error messages when invalid
+
+# URL Validation with Pydantic
+**AnyUrl** is a Pydantic validator that automatically validates URL format and ensures the field contains a valid URL.
+
+```python
+from pydantic import BaseModel, AnyUrl
+class ITProfile(BaseModel):
+    linkedin_url: AnyUrl  # Validates URL format
+    github_url: Optional[AnyUrl] = None  # Optional GitHub profile
+```
+```python
+# ✅ Valid URLs
+p1 = ITProfile(linkedin_url='https://www.linkedin.com/in/johndoe', github_url='https://www.github.com/johndoe')
+
+# ❌ Invalid URL - raises ValidationError
+p2 = ITProfile(linkedin_url='invalid-url')
+p3 = ITProfile(linkedin_url='www.linkedin.com/in/johndoe')  # Missing scheme (http/https)
+p4 = ITProfile(linkedin_url='https://')
+```

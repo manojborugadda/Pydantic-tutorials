@@ -1,15 +1,23 @@
-from pydantic import BaseModel,EmailStr
+from pydantic import AnyUrl, BaseModel,EmailStr
 from typing import Dict, List,Optional
 
 class Patient(BaseModel):
     # 1 -- creating schema of pydantic class
+
+    # Basic information
     name : str # string type validation
     age: int   # integer type validation
     weight: float  # float type validation
+    email: EmailStr # Automatically validates email format
+
+    # IT-specific fields
+    linkedin_url: AnyUrl  # Validates URL format
+    github_url: Optional[AnyUrl] = None  # Optional GitHub profile
+
+    # Medical information
     allergies: Optional[List[str]] = None  # list of strings with default value
     married: bool = False # boolean type with default value
     contact_details: Dict[str, str]  # dictionary with string keys and string values
-    email: EmailStr # Automatically validates email format
 
 # simulating incoming data as dictionary
 
@@ -19,7 +27,7 @@ class Patient(BaseModel):
 
 patient_info = {'name': 'Rafael Nadal', 'age': "32", 'weight': 85.5,
                 
-                'contact_details': {'phone': '123-456-7890', 'email': 'rafael.nadal@gmail.com'},'email': 'rafael.nadal@gmail.com'}
+                'contact_details': {'phone': '123-456-7890', 'email': 'rafael.nadal@gmail.com'},'email': 'rafael.nadal@gmail.com', 'linkedin_url': 'https://www.linkedin.com/in/rafaelnadal/','github_url': 'https://www.github.com/rafaelnadal'}
 
 #2 --- creating pydantic object from Patient class
 patient1 = Patient(**patient_info) # here ** means unpacking the dictionary
@@ -35,6 +43,8 @@ def update_patient_data(patient1):
     print(patient1.married)
     print(patient1.contact_details)
     print(patient1.email)
+    print(patient1.linkedin_url)
+    print(patient1.github_url)
     # print('updated')
 
 
