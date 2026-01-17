@@ -33,7 +33,10 @@ Pydantic automatically coerces values to match the schema when possible. Since "
 
 Key behaviors:
 
-✅ "32" → 32 (works - valid conversion)
+✅ "32" → 32 (works - valid conversion) 
+
 ✅ 32.0 → 32 (works - float to int conversion)
+
 ✅ True → 1 (works - bool to int)
+
 ❌ "hello" → Error (can't convert non-numeric string to int)
