@@ -40,3 +40,54 @@ Key behaviors:
 ✅ True → 1 (works - bool to int)
 
 ❌ "hello" → Error (can't convert non-numeric string to int)
+
+# Optional and Default values in Pydantic
+
+With Optional:
+
+```
+from typing import Optional
+
+class Patient(BaseModel):
+    allergies: Optional[List[str]] = None
+
+```
+
+Without Optional:
+
+```
+class Patient(BaseModel):
+    allergies: List[str]  # REQUIRED - must provide a list
+
+# ❌ This would fail:
+p = Patient(name='John', age=25)  # Missing allergies field
+
+```
+
+Default Values: 
+Default values make a field optional by providing a fallback value if not supplied.
+```
+class Patient(BaseModel):
+    married: bool = False  # Default is False
+    allergies: Optional[List[str]] = None  # Default is None
+
+```
+
+## **Default Values**
+
+Default values make a field optional by providing a fallback value if not supplied.
+
+```python
+class Patient(BaseModel):
+    married: bool = False  # Default is False
+    allergies: Optional[List[str]] = None  # Default is None
+```
+
+**Key differences:**
+
+| Scenario | Code | Required? | Default |
+|----------|------|-----------|---------|
+| **No default, no Optional** | `name: str` | ✅ Yes | None |
+| **Default value** | `married: bool = False` | ❌ No | False |
+| **Optional (no default)** | `allergies: Optional[List[str]]` | ✅ Yes | None |
+| **Optional + default** | `allergies: Optional[List[str]] = None` | ❌ No | None |
