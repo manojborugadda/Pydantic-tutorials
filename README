@@ -1,0 +1,15 @@
+##Problems with our current approach in 1_before_pydantic python file:
+--------------------------------------------------
+1.Repetitive boilerplate code - You're manually checking types in every function (if type(name) == str and type(age) == int). This doesn't scale.
+
+2.No validation beyond type checking - You can only validate types. What if you need to validate:
+
+    Age must be > 0 and < 150
+    Name must be non-empty or match a pattern
+    Email format validation
+    Custom business logic
+3.Error handling is manual - You raise generic TypeError without detailed messages about what went wrong or where.
+
+4.Hard to maintain - If you add 10 more functions with similar validation, you're duplicating the same checks everywhere.
+
+5.No documentation - The code doesn't clearly document what valid inputs look like.
