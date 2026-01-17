@@ -1,5 +1,5 @@
-##Problems with our current approach in 1_before_pydantic python file:
---------------------------------------------------
+# Problems with our current approach in 1_before_pydantic python file:
+------------------------------------------------------------------------
 1.Repetitive boilerplate code - You're manually checking types in every function (if type(name) == str and type(age) == int). This doesn't scale.
 
 2.No validation beyond type checking - You can only validate types. What if you need to validate:
