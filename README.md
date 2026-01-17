@@ -21,7 +21,7 @@ Pydantic automatically converts data types when possible. For example, if you pa
 This automatic coercion makes Pydantic very flexible for real-world scenarios where data comes from APIs, forms, or databases with inconsistent types
 
 
-```
+```python
 patient_info = {'name': 'Rafael Nadal', 'age': "32"}  # age is a STRING "32"
 patient1 = Patient(**patient_info)
 print(patient1.age)  # Output: 32 (as INTEGER)
@@ -45,7 +45,7 @@ Key behaviors:
 
 With Optional:
 
-```
+```python
 from typing import Optional
 
 class Patient(BaseModel):
@@ -55,22 +55,20 @@ class Patient(BaseModel):
 
 Without Optional:
 
-```
+```python
 class Patient(BaseModel):
     allergies: List[str]  # REQUIRED - must provide a list
 
 # ❌ This would fail:
 p = Patient(name='John', age=25)  # Missing allergies field
-
 ```
 
 Default Values: 
 Default values make a field optional by providing a fallback value if not supplied.
-```
+```python
 class Patient(BaseModel):
     married: bool = False  # Default is False
     allergies: Optional[List[str]] = None  # Default is None
-
 ```
 
 ## **Default Values**
