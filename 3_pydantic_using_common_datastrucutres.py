@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,EmailStr
 from typing import Dict, List,Optional
 
 class Patient(BaseModel):
@@ -9,6 +9,7 @@ class Patient(BaseModel):
     allergies: Optional[List[str]] = None  # list of strings with default value
     married: bool = False # boolean type with default value
     contact_details: Dict[str, str]  # dictionary with string keys and string values
+    email: EmailStr # Automatically validates email format
 
 # simulating incoming data as dictionary
 
@@ -16,9 +17,9 @@ class Patient(BaseModel):
 #                 'allergies': ['pollen', 'nuts'], 'married': True,
 #                 'contact_details': {'phone': '123-456-7890', 'email': 'rafael.nadal@gmail.com'}}
 
-patient_info = {'name': 'Rafael Nadal', 'age': "32", 'weight': 85.5, 
+patient_info = {'name': 'Rafael Nadal', 'age': "32", 'weight': 85.5,
                 
-                'contact_details': {'phone': '123-456-7890', 'email': 'rafael.nadal@gmail.com'}}
+                'contact_details': {'phone': '123-456-7890', 'email': 'rafael.nadal@gmail.com'},'email': 'rafael.nadal@gmail.com'}
 
 #2 --- creating pydantic object from Patient class
 patient1 = Patient(**patient_info) # here ** means unpacking the dictionary
@@ -33,6 +34,7 @@ def update_patient_data(patient1):
     print(patient1.allergies)
     print(patient1.married)
     print(patient1.contact_details)
+    print(patient1.email)
     # print('updated')
 
 

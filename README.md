@@ -89,3 +89,34 @@ class Patient(BaseModel):
 | **Default value** | `married: bool = False` | ❌ No | False |
 | **Optional (no default)** | `allergies: Optional[List[str]]` | ✅ Yes | None |
 | **Optional + default** | `allergies: Optional[List[str]] = None` | ❌ No | None |
+
+
+# Email Validation with Pydantic
+EmailStr is a Pydantic validator that automatically validates email format and ensures the field contains a valid email address
+Note: You may need to install the email-validator package: pip install email-validator
+
+```python
+from pydantic import BaseModel, EmailStr
+class Patient(BaseModel):
+    name: str
+    email: EmailStr  # Validates email format automatically
+```
+```python
+# ✅ Valid email
+p1 = Patient(name='John', email='john@example.com')
+
+# ❌ Invalid email - raises ValidationError
+p2 = Patient(name='John', email='invalid-email')
+p3 = Patient(name='John', email='john@')
+p4 = Patient(name='John', email='@example.com')
+```
+
+Benefits:
+
+✅ Automatic email validation
+
+✅ Prevents invalid emails from being stored
+
+✅ No need to write regex or custom validation logic
+
+✅ Clear error messages when invalid
