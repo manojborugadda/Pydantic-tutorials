@@ -5,9 +5,7 @@ class Patient(BaseModel):
     name : str # type validation
     age: int   # type validation
 
-
-
-
+# simulating incoming data as dictionary
 
 patient_info = {'name': 'Rafael Nadal', 'age': "32"}
 
