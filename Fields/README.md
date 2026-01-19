@@ -105,3 +105,44 @@ patient_info = {
 patient = Patient(**patient_info)
 print(patient.name)  # Works fine
 ```
+
+# Annotations with Fields in Pydantic
+Pydantic supports the use of `Annotated` from the `typing` module to combine type hints with additional metadata, such as validation rules provided by `Field`. This allows for a more structured and clear way to define fields in your models.
+
+Annotated makes your code more readable by keeping the type information upfront while keeping metadata organized with Field. It's the modern Pydantic best practice
+
+
+```python
+from typing import Annotated
+from pydantic import Field
+
+# Without Annotated
+name: str = Field(max_length=50, description="Patient name")
+
+# With Annotated (cleaner)
+name: Annotated[str, Field(max_length=50, description="Patient name")]
+```
+
+**Why use Annotated?**
+
+1. Separates type from constraints - Type hint is clear, metadata is separate
+2. Better readability - The actual type (str, int, etc.) is prominent
+3. IDE support - Better type checking and autocomplete
+4. Standards compliant - Works with other tools (**FastAPI**, JSON Schema, etc.)
+
+**Comparison:**
+
+```python
+from typing import Annotated
+from pydantic import Field, BaseModel
+
+# ❌ Old way (less clear)
+class PatientOld(BaseModel):
+    name: str = Field(max_length=50, title="Name")
+    age: int = Field(gt=0, le=120)
+
+# ✅ New way with Annotated (clearer)
+class PatientNew(BaseModel):
+    name: Annotated[str, Field(max_length=50, title="Name")]
+    age: Annotated[int, Field(gt=0, le=120)]
+```
