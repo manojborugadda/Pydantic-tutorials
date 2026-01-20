@@ -174,7 +174,6 @@ Pydantic provides a powerful way to validate and transform data using field vali
 Note: By default, if no mode is specified, `mode='after'` is used.
 
 # Wrap Validators in Pydantic
-"""
 ``Wrap validators``: the most flexible validators. They let you run code BEFORE or AFTER Pydantic validates the input. You can also skip validation entirely and return/reject the value immediately.
 
 How they work:
@@ -193,8 +192,9 @@ Example flow:
 Think of wrap like a security checkpoint:
 
 Before handler: Check the person's ID
-Handler: Run standard security scan (metal detector, etc.)
-After handler: Give them a visitor badge
-Skip handler: For VIPs, let them straight through without the scan
 
-"""
+Handler: Run standard security scan (metal detector, etc.)
+
+After handler: Give them a visitor badge
+
+Skip handler: For VIPs, let them straight through without the scan
