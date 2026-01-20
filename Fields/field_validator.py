@@ -49,6 +49,13 @@ class Patient(BaseModel):
         if value < 0 or value > 120:
             raise ValueError('Age must be between 0 and 120')
         return value
+    
+
+patient_info = {'name': 'Rafael Nadal', 'age': 45, 'weight': 85.5,
+                'email': 'rafael.nadal@hdfc.com',  # ❌ gmail.com not allowed
+                'linkedin_url': 'https://www.linkedin.com/in/rafaelnadal/',
+                'contact_details': {'phone': '123-456-7890'}}
+
 
 #2 --- creating pydantic object from Patient class
 
