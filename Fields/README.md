@@ -160,4 +160,41 @@ try:
 except ValidationError as e:
     print(e)
 ```
-In this example, attempting to create a `Patient` instance with a string for the `age` field will result in a validation error because `strict=True` enforces that the input must be an integer.This is particularly useful in scenarios where data integrity is critical, and you want to avoid unintended type conversions. 
+In this example, attempting to create a `Patient` instance with a string for the `age` field will result in a validation error because `strict=True` enforces that the input must be an integer.This is particularly useful in scenarios where data integrity is critical, and you want to avoid unintended type conversions.
+
+# Field Validators in Pydantic
+Pydantic provides a powerful way to validate and transform data using field validators. Field validators are methods that you can define in your Pydantic models to perform custom validation or transformation logic on specific fields.
+
+**modes of field validators:**
+1. `before`: The validator is called before any type coercion or validation is performed on the field.
+2. `after`: The validator is called after the field has been validated and coerced to the correct type.
+3. `wrap`: The validator wraps around the standard validation process, allowing you to access both the raw input and the validated value.
+4. `plain`: The validator is called with the raw input value, without any type coercion or validation.
+
+Note: By default, if no mode is specified, `mode='after'` is used.
+
+# Wrap Validators in Pydantic
+"""
+``Wrap validators``: the most flexible validators. They let you run code BEFORE or AFTER Pydantic validates the input. You can also skip validation entirely and return/reject the value immediately.
+
+How they work:
+- You define a validator with an extra 'handler' parameter
+- The handler is a function that runs Pydantic's standard validation
+- You can wrap the handler call in try-except to catch errors
+- You can choose to call the handler or skip it completely
+
+Example flow:
+1. Your code runs BEFORE handler (pre-validation logic)
+2. Call handler(value) to run Pydantic's validation
+3. Your code runs AFTER handler (post-validation logic)
+4. Return the final value
+
+**Real-world analogy**:
+Think of wrap like a security checkpoint:
+
+Before handler: Check the person's ID
+Handler: Run standard security scan (metal detector, etc.)
+After handler: Give them a visitor badge
+Skip handler: For VIPs, let them straight through without the scan
+
+"""
