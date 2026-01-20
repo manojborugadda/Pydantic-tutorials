@@ -189,12 +189,12 @@ Example flow:
 4. Return the final value
 
 **Real-world analogy**:
-Think of wrap like a security checkpoint:
+    Think of wrap like a security checkpoint:
 
-Before handler: Check the person's ID
+    Before handler: Check the person's ID
 
-Handler: Run standard security scan (metal detector, etc.)
+    Handler: Run standard security scan (metal detector, etc.)
 
-After handler: Give them a visitor badge
+    After handler: Give them a visitor badge
 
-Skip handler: For VIPs, let them straight through without the scan
+    Skip handler: For VIPs, let them straight through without the scan
