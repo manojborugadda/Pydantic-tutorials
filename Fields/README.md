@@ -146,3 +146,18 @@ class PatientNew(BaseModel):
     name: Annotated[str, Field(max_length=50, title="Name")]
     age: Annotated[int, Field(gt=0, le=120)]
 ```
+
+# strict Parameter in Pydantic Fields
+Pydantic provides a `strict` parameter in the `Field` function that enforces strict type checking for fields. When `strict=True` is set, Pydantic will not perform any type coercion and will raise a validation error if the input data does not exactly match the specified type.
+
+```python
+from pydantic import BaseModel, Field, ValidationError
+class Patient(BaseModel):
+    age: int = Field(strict=True)
+# Example usage
+try:
+    patient = Patient(age='30')  # This will raise a ValidationError
+except ValidationError as e:
+    print(e)
+```
+In this example, attempting to create a `Patient` instance with a string for the `age` field will result in a validation error because `strict=True` enforces that the input must be an integer.This is particularly useful in scenarios where data integrity is critical, and you want to avoid unintended type conversions. 
