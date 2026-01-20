@@ -49,36 +49,6 @@ class Patient(BaseModel):
         if value < 0 or value > 120:
             raise ValueError('Age must be between 0 and 120')
         return value
-    
-    
-# WRAP example: full control around standard validation
-    @field_validator('linkedin_url', mode='wrap')
-    @classmethod
-    def linkedin_wrap_validator(cls, value, handler):
-        # value = raw input; handler(value) -> runs standard AnyUrl validation/coercion
-        print(f"[wrap] raw linkedin input: {value!r}")
-
-        # run normal validation (this will coerce/validate AnyUrl)
-        validated = handler(value)
-
-        # validated is an AnyUrl-like object; ensure domain is linkedin.com
-        host = getattr(validated, "host", None) or str(validated).split("//")[-1].split("/")[0]
-        if "linkedin.com" not in host:
-            raise ValueError("linkedin_url must be a linkedin.com URL")
-
-        # enforce https and return a string
-        url_str = str(validated)
-        if getattr(validated, "scheme", None) and getattr(validated, "scheme") != "https":
-            url_str = url_str.replace("http://", "https://", 1)
-
-        print(f"[wrap] validated linkedin value -> {url_str!r}")
-        return url_str
-
-patient_info = {'name': 'Rafael Nadal', 'age': 45, 'weight': 85.5,
-                'email': 'rafael.nadal@hdfc.com',  # ❌ gmail.com not allowed
-                'linkedin_url': 'https://www.linkedin.com/in/rafaelnadal/',
-                'contact_details': {'phone': '123-456-7890'}}
-
 
 #2 --- creating pydantic object from Patient class
 
