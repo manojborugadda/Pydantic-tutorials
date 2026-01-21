@@ -54,13 +54,18 @@ class Patient(BaseModel):
 | Included in schema (OpenAPI) | ❌ No        | ✅ Yes             |
 | Serializable                 | ❌ No        | ✅ Yes             |
 
+## FAQ
+NOTE:
+
 FastAPI exposes computed fields in Swagger automatically
 
 Q: Can computed fields be validated?
+
 A: No, computed fields are derived from other fields and are not directly validated. However, you can ensure that the base fields used in the computation are validated properly.
 If validation is required, it must happen on the input fields or via a model validator.
 
 Q: Can clients send computed fields in request payload?
+
 A: No, computed fields are read-only and cannot be set by clients. They are derived from other fields in the model and are intended for output purposes only.
 
 ```text
