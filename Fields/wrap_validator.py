@@ -24,3 +24,34 @@ Skip handler: For VIPs, let them straight through without the scan
 """
 
 
+# Data Validation for ML Model Input
+from pydantic import BaseModel, field_validator, ValidationError
+
+class MLModelInput(BaseModel):
+    """Input data for a machine learning model"""
+    feature_1: float
+    feature_2: float
+    feature_3: float
+    
+    @field_validator('feature_1', 'feature_2', 'feature_3', mode='wrap')
+    @classmethod
+    def validate_feature_range(cls, value, handler):
+        # BEFORE: Log the raw input (for debugging/monitoring)
+        print(f"[LOG] Raw feature value: {value}")
+        
+        # Call handler: Run Pydantic's standard validation (type coercion)
+        validated_value = handler(value)
+        
+        # AFTER: Check if feature is in expected range (ML domain knowledge)
+        if validated_value < -100 or validated_value > 100:
+            raise ValueError(f"Feature out of range [-100, 100]: {validated_value}")
+        
+        print(f"[LOG] Validated feature value: {validated_value}")
+        return validated_value
+
+# Usage
+try:
+    input_data = MLModelInput(feature_1="45.5", feature_2=32.1, feature_3=78.9)
+    print("✓ Input valid, ready for model inference")
+except ValidationError as e:
+    print(f"✗ Validation failed: {e}")
