@@ -7,7 +7,7 @@ class Patient(BaseModel):
     name: str
     email: EmailStr
     age: int
-    weight: float
+    weight: float 
     married: bool
     allergies: List[str]
     contact_details: Dict[str, str]
