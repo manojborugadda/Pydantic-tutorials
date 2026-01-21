@@ -3,9 +3,9 @@
 
 Nested models are Pydantic models that are used inside other models as fields.
 They help represent 
-                    **structured, 
+                    structured, 
                     hierarchical data and 
-                    enforce validation **at multiple levels, which is common in MLOps pipelines.
+                    enforce validation at multiple levels, which is common in MLOps pipelines.
 
 ## What exactly are Nested Models?
 A nested model is simply:
@@ -45,7 +45,7 @@ print(patient.address.city)  # Access nested model field
 - **Clearer Validation**: Each model validates its own fields, improving data integrity.
 - **Improved Readability**: Logical grouping of related fields enhances code clarity.
 
-##### Why NOT just use dict?
+# Why NOT just use dict?
 
 Using plain dictionaries for nested data lacks the benefits of Pydantic models:
 
@@ -61,6 +61,7 @@ In MLOps, nested models are commonly used for:
 - **Configuration Management**: Complex configurations with multiple sections (e.g., data sources, model parameters).
 - **Data Schemas**: Representing structured input/output data for models.
 - **Experiment Tracking**: Storing detailed experiment metadata with nested attributes.
+
 
 
 **Nested models allow us to model complex ML inputs, configs, and outputs in a structured and validated way, which is critical for reliable MLOps systems**
