@@ -1,6 +1,6 @@
 
 
-**What are computed fields in Pydantic, why do we need them, and where are they used in MLOps?**
+## What are computed fields in Pydantic, why do we need them, and where are they used ?
 
 Computed fields in Pydantic are properties that are automatically computed from other fields in a model. They allow you to define dynamic values based on existing fields, which can be useful for calculations or derived data.
 
