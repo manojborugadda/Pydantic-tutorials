@@ -173,8 +173,8 @@ Pydantic provides a powerful way to validate and transform data using field vali
 
 Note: By default, if no mode is specified, `mode='after'` is used.
 
-# Wrap Validators in Pydantic
-``Wrap validators``: the most flexible validators. They let you run code BEFORE or AFTER Pydantic validates the input. You can also skip validation entirely and return/reject the value immediately.
+# Wrap mode in Field Validators in Pydantic
+**Wrap validators**: the most flexible validators. They let you run code BEFORE or AFTER Pydantic validates the input. You can also skip validation entirely and return/reject the value immediately.
 
 How they work:
 - You define a validator with an extra 'handler' parameter
