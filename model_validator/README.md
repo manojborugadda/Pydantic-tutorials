@@ -70,3 +70,8 @@ class EventNew(BaseModel):
 | -------- | ----------------------- | ---------------------------------- |
 | `before` | Before field validation | Normalize payload, inject defaults |
 | `after`  | After validation        | Cross-field checks                 |
+
+
+Most MLOps use mode="after"
+
+Field validators ensure data correctness, while model validators ensure configuration correctness — which is critical in MLOps to prevent bad training or inference runs
