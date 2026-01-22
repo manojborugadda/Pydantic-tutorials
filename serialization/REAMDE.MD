@@ -76,7 +76,7 @@ print(patient)
 #> name='Jane Doe' age=28 weight=60.0 height=1.65
 ```
 
-# Why serialization is critical in MLOps (Interview Focus)
+# Why serialization is critical in MLOps?
 
 Serialization is used when:
 
@@ -89,3 +89,26 @@ Serialization is used when:
 - Storing metadata in databases
 
 - **Without serialization → model output is unusable outside Python**
+
+
+
+# exclude_unset: Exclude fields that were not explicitly set (i.e., fields with default values)
+```python
+from pydantic import BaseModel
+class Address(BaseModel):
+    city: str
+    state: str
+    pin: str
+class Patient(BaseModel):
+    name: str
+    age: int
+    address: Address
+    gender: str = 'male'  # default value
+address_dict = {'city': 'Mallorca', 'state': 'spain', 'pin': '122001'}
+patient_dict = {'name': 'ALCARAZ', 'age': 35, 'address': address_dict,'gender':'female'}
+patient = Patient(**patient_dict)
+
+patient_dict = patient.model_dump(exclude_unset=True)
+print(patient_dict)
+#> {'name': 'ALCARAZ', 'age': 35, 'address': {'city': 'Mallorca', 'state': 'spain', 'pin': '122001'}}
+```
